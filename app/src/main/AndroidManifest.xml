@@ -17,7 +17,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".NewGameActivity" />
-        <activity android:name=".TweetCrawler" />
+        <activity android:name=".GameActivity" />
     </application>
 
 </manifest>

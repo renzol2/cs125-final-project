@@ -2,15 +2,18 @@ package com.example.cs125finalproject;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.android.volley.Request;
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.twitter.sdk.android.core.Twitter;
+
+import org.json.JSONObject;
 
 
 /**
@@ -35,10 +38,40 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // scratching the Twitter thing... trying Volley requests instead
-        final TextView textView = findViewById(R.id.textView);
+        // does this set up authentication?
+        Twitter.initialize(this);
 
-        TweetCrawler tweetCrawler = new TweetCrawler();
-        tweetCrawler.grabTweet();
+        // TODO: make a button that goes to NewGameActivity
+        final TextView textView = findViewById(R.id.textView);
+        final Button newGameButton = findViewById(R.id.newGame);
+        newGameButton.setOnClickListener(unused -> startActivity());
+
+        // scratching the Twitter thing... trying Volley requests instead
+        grabTweet();
+    }
+
+    private void startActivity() {
+        Intent intent = new Intent(this, NewGameActivity.class);
+        startActivity(intent);
+    }
+
+    /**
+     * Code taken from:
+     * https://developer.android.com/training/volley/request
+     * Change the URL to get a different JSON object (theoretically...)
+     *
+     * Current issue: Twitter requires authentication with consumer keys/secrets, and I don't know
+     * how to set those up...
+     */
+    public void grabTweet() {
+        String url = "https://archive.org/download/archiveteam-twitter-stream-2019-08/twitter_stream_2019_08_01.tar/01%2F00%2F29.json.bz2";
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
+                (Request.Method.GET, url, null,
+                        response -> System.out.println("Response: " + response),
+                        error -> System.out.println("ERROR!! " + error.getMessage()));
+
+        // Access the RequestQueue through your singleton class.
+        MySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest);
     }
 }
