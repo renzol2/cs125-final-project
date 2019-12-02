@@ -1,5 +1,7 @@
 package com.example.cs125finalproject;
 
+import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 public class GameActivity extends AppCompatActivity {
@@ -11,5 +13,9 @@ public class GameActivity extends AppCompatActivity {
     private static String ConsumerKey = "HTjt6QQpZ9pFqi3ojCKrF5ZEP";
     private static String ConsumerSecret = "5EyKqzk9n3JrxrOpB2pel6XBIPiQ5VoRzEn13LwTTMBMLIs3Rj";
 
-    public GameActivity() { }
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.my_tweet_activity);
+    }
 }
