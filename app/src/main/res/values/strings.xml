@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">CS125 Final Project</string>
     <string name="title">TWEET UNSCRAMBLER</string>
+    <string name="create_game">Create Game</string>
 </resources>

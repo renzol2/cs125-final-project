@@ -64,7 +64,8 @@ public class MainActivity extends AppCompatActivity {
      * how to set those up...
      */
     public void grabTweet() {
-        String url = "https://archive.org/download/archiveteam-twitter-stream-2019-08/twitter_stream_2019_08_01.tar/01%2F00%2F29.json.bz2";
+        // This is for random Trump tweets LMAO it works though!
+        String url = "https://api.tronalddump.io/random/quote";
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                 (Request.Method.GET, url, null,

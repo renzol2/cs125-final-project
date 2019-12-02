@@ -8,7 +8,7 @@ public class NewGameActivity extends AppCompatActivity {
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_game);
-
+        setTitle("Create Game");
         // TODO: make a button that goes to GameActivity
     }
 }
