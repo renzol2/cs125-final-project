@@ -37,28 +37,8 @@ public class MainActivity extends AppCompatActivity {
 
         // scratching the Twitter thing... trying Volley requests instead
         final TextView textView = findViewById(R.id.textView);
-        // ...
 
-        // Instantiate the RequestQueue.
-        RequestQueue queue = Volley.newRequestQueue(this);
-        String url = "https://archive.org/download/archiveteam-twitter-stream-2019-08";
-
-        // Request a string response from the provided URL.
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        // Display response.
-                        textView.setText(response);
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                textView.setText("That didn't work!");
-            }
-        });
-
-        // Add the request to the RequestQueue.
-        queue.add(stringRequest);
+        TweetCrawler tweetCrawler = new TweetCrawler();
+        tweetCrawler.grabTweet();
     }
 }
