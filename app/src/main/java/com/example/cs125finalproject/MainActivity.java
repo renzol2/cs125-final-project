@@ -3,9 +3,15 @@ package com.example.cs125finalproject;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.widget.TextView;
 
-import com.twitter.sdk.android.core.Twitter;
-import com.twitter.sdk.android.core.TwitterCore;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
 
 /**
  * The main screen of the app. Made by Renzo and Saurav :)
@@ -29,10 +35,30 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Following instructions from:
-        // https://github.com/twitter-archive/twitter-kit-android/wiki/Getting-Started
+        // scratching the Twitter thing... trying Volley requests instead
+        final TextView textView = findViewById(R.id.textView);
+        // ...
 
-        // Initializing Twitter Kit...
-        Twitter.initialize(this);
+        // Instantiate the RequestQueue.
+        RequestQueue queue = Volley.newRequestQueue(this);
+        String url = "https://archive.org/download/archiveteam-twitter-stream-2019-08";
+
+        // Request a string response from the provided URL.
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        // Display response.
+                        textView.setText(response);
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                textView.setText("That didn't work!");
+            }
+        });
+
+        // Add the request to the RequestQueue.
+        queue.add(stringRequest);
     }
 }
