@@ -12,14 +12,17 @@ import com.android.volley.toolbox.JsonObjectRequest;
 
 import org.json.JSONException;
 
+import twitter4j.Paging;
+import twitter4j.Status;
+import twitter4j.Twitter;
+import twitter4j.TwitterException;
+import twitter4j.TwitterFactory;
+import twitter4j.conf.ConfigurationBuilder;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class GameActivity extends AppCompatActivity {
-
-    /** These are all tokens used for Twitter authentication... not sure where/when to use these yet. */
-
-    private static String AccessToken = "AAAAAAAAAAAAAAAAAAAAAOG%2FAwEAAAAA8DxwzCrhKnTvrJSfxHF02gxSdEY%3DIrmYPtSyRUsu1UqzTdsQxgWQnICb1QbEtJmlHCJvkP9218u60l";
-    private static String AccessSecret = "xxx";
-    private static String ConsumerKey = "HTjt6QQpZ9pFqi3ojCKrF5ZEP";
-    private static String ConsumerSecret = "5EyKqzk9n3JrxrOpB2pel6XBIPiQ5VoRzEn13LwTTMBMLIs3Rj";
 
     private TextView tweetView;
 
@@ -32,7 +35,12 @@ public class GameActivity extends AppCompatActivity {
         // Set the initial text.
         displayRandomTrumpTweet();
 
+        // Try getting Drumpf tweets.
         // Make the button generate and display a new Tweet.
+        TweetGetter getter = new TweetGetter("DeepDrumpf");
+        // Here we'll grab the tweets to display, but currently it's not working since I need to
+        // work on something with AsyncTasks(?)
+
         Button newTweetButton = findViewById(R.id.submit);
         newTweetButton.setOnClickListener(unused -> displayRandomTrumpTweet());
 
@@ -42,14 +50,11 @@ public class GameActivity extends AppCompatActivity {
 
             public void onTick(long millisUntilFinished) {
                 int remainingSeconds = (int) millisUntilFinished / 1000;
-                // TODO: Need to figure out how to get the timer to show in the text view...
-                if (millisUntilFinished % 1000 == 0) {
-                    timerText.setText(remainingSeconds);
-                }
+                String time = "Time: " + remainingSeconds;
+                timerText.setText(time);
             }
 
             public void onFinish() {
-                timerText.setText("Done!");
                 finish();
             }
         };

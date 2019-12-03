@@ -10,19 +10,24 @@
         android:id="@+id/timer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="Timer"
         android:textColor="#F73022"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:visibility="visible"
+        tools:visibility="visible" />
 
     <TextView
         android:id="@+id/newTweetText"
         android:layout_width="164dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="125dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="25dp"
         android:layout_marginEnd="136dp"
         android:text="@string/newTweet"
         android:textColor="#000000"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:textStyle="bold|italic" />
 
     <TextView
         android:id="@+id/tweet"
@@ -33,7 +38,8 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textSize="30sp"
         android:textStyle="bold"
-        app:fontFamily="sans-serif-condensed-light" />
+        android:typeface="serif"
+        app:fontFamily="serif" />
 
     <Button
         android:id="@+id/submit"
@@ -42,7 +48,7 @@
         android:layout_gravity="bottom|center"
         android:layout_marginStart="160dp"
         android:layout_marginEnd="136dp"
-        android:text="@string/submitButton"
+        android:text="@string/newTweetButton"
         tools:text="@string/newTweetButton" />
 
 </LinearLayout>
