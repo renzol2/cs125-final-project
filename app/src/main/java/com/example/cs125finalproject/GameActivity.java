@@ -1,6 +1,7 @@
 package com.example.cs125finalproject;
 
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -34,6 +35,27 @@ public class GameActivity extends AppCompatActivity {
         // Make the button generate and display a new Tweet.
         Button newTweetButton = findViewById(R.id.submit);
         newTweetButton.setOnClickListener(unused -> displayRandomTrumpTweet());
+
+        // Set the timer.
+        TextView timerText = findViewById(R.id.timer);
+        CountDownTimer timer = new CountDownTimer(30000, 1000) {
+
+            public void onTick(long millisUntilFinished) {
+                int remainingSeconds = (int) millisUntilFinished / 1000;
+                // TODO: Need to figure out how to get the timer to show in the text view...
+                if (millisUntilFinished % 1000 == 0) {
+                    timerText.setText(remainingSeconds);
+                }
+            }
+
+            public void onFinish() {
+                timerText.setText("Done!");
+                finish();
+            }
+        };
+
+        // Start timer.
+        timer.start();
     }
 
     /**

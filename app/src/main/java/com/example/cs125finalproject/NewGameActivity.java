@@ -13,6 +13,11 @@ public class NewGameActivity extends AppCompatActivity {
 
         // TODO: figure out setup of activities
         Button startGame = findViewById(R.id.startGame);
-        startGame.setOnClickListener(unused -> startActivity(new Intent(this, GameActivity.class)));
+        startGame.setOnClickListener(unused -> startActivity());
+    }
+
+    public void startActivity() {
+        startActivity(new Intent(this, GameActivity.class));
+        finish();
     }
 }

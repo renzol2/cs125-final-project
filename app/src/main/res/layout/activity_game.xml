@@ -7,11 +7,18 @@
     android:orientation="vertical">
 
     <TextView
+        android:id="@+id/timer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#F73022"
+        android:textSize="18sp" />
+
+    <TextView
         android:id="@+id/newTweetText"
-        android:layout_width="285dp"
-        android:layout_height="33dp"
-        android:layout_margin="70dp"
+        android:layout_width="164dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="125dp"
+        android:layout_marginTop="50dp"
         android:layout_marginEnd="136dp"
         android:text="@string/newTweet"
         android:textColor="#000000"
@@ -35,7 +42,6 @@
         android:layout_gravity="bottom|center"
         android:layout_marginStart="160dp"
         android:layout_marginEnd="136dp"
-        android:layout_marginBottom="40dp"
         android:text="@string/submitButton"
         tools:text="@string/newTweetButton" />
 
