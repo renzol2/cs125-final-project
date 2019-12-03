@@ -41,15 +41,13 @@ public class GameActivity extends AppCompatActivity {
         CountDownTimer timer = new CountDownTimer(30000, 1000) {
 
             public void onTick(long millisUntilFinished) {
-                int remainingSeconds = (int) millisUntilFinished / 1000;
                 // TODO: Need to figure out how to get the timer to show in the text view...
-                if (millisUntilFinished % 1000 == 0) {
-                    timerText.setText(remainingSeconds);
-                }
+                int remainingSeconds = (int) millisUntilFinished / 1000;
+                String time = "Time: " + remainingSeconds;
+                timerText.setText(time);
             }
 
             public void onFinish() {
-                timerText.setText("Done!");
                 finish();
             }
         };
