@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/newTweetText"
+        android:layout_width="285dp"
+        android:layout_height="33dp"
+        android:layout_margin="70dp"
+        android:layout_marginStart="125dp"
+        android:layout_marginEnd="136dp"
+        android:text="@string/newTweet"
+        android:textColor="#000000"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/tweet"
+        android:layout_width="335dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="40dp"
+        android:gravity="center_horizontal"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:fontFamily="sans-serif-condensed-light" />
+
+    <Button
+        android:id="@+id/submit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center"
+        android:layout_marginStart="160dp"
+        android:layout_marginEnd="136dp"
+        android:layout_marginBottom="40dp"
+        android:text="@string/submitButton"
+        tools:text="@string/newTweetButton" />
+
+</LinearLayout>

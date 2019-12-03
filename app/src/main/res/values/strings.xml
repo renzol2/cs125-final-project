@@ -1,7 +1,8 @@
 <resources>
     <string name="app_name">CS125 Final Project</string>
     <string name="title">TWEET UNSCRAMBLER</string>
-    <string name="unscrambleText">Try to unscramble Tweet:</string>
+    <string name="newTweet">Click to display a new Trump tweet:</string>
     <string name="submitButton">Submit</string>
+    <string name="newTweetButton">NEW TWEET</string>
     <string name="startGame">Start Game</string>
 </resources>
