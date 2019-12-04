@@ -3,20 +3,20 @@ package com.example.cs125finalproject;
 import java.util.List;
 import java.util.Random;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.text.AlteredCharSequence;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.Request;
 import com.android.volley.toolbox.JsonObjectRequest;
 
 import org.json.JSONException;
-
-import twitter4j.Status;
-import twitter4j.TwitterException;
 
 public class GameActivity extends AppCompatActivity {
 
@@ -48,6 +48,23 @@ public class GameActivity extends AppCompatActivity {
         Button realButton = findViewById(R.id.realButton);
         Button fakeButton = findViewById(R.id.fakeButton);
 
+        //Launch AlertDialog based on correct or incorrect
+        realButton.setOnClickListener(v -> {
+            if (realTweet) {
+                correctDialog();
+            } else {
+                incorrectDialog();
+            }
+        });
+
+        fakeButton.setOnClickListener(v -> {
+            if (realTweet) {
+                incorrectDialog();
+            } else {
+                correctDialog();
+            }
+        });
+
         // Set the timer.
         TextView timerText = findViewById(R.id.timer);
         CountDownTimer timer = new CountDownTimer(30000, 1000) {
@@ -77,9 +94,8 @@ public class GameActivity extends AppCompatActivity {
      */
     public void displayRandomTrumpTweet() {
         // Found two APIs with real Donald Trump tweets/quotes, so I figured we could use both!
-        Random r = new Random();
         String url, quoteName;
-        if (r.nextBoolean()) {
+        if (random.nextBoolean()) {
             url = "https://api.tronalddump.io/random/quote";
             quoteName = "value";
         } else {
@@ -103,17 +119,31 @@ public class GameActivity extends AppCompatActivity {
     }
     public void displayRandomFakeTweet() {
         List<twitter4j.Status> tweetsList = getter.getTweetsList();
-        Random r = new Random();
-        int randIndex = r.nextInt(tweetsList.size());
+        int randIndex = random.nextInt(tweetsList.size());
         String tweet = tweetsList.get(randIndex).getText();
         tweetView.setText(tweet);
     }
     private void chooseRandomTweet() {
-        Random r = new Random();
         if (random.nextBoolean()) {
+            realTweet = true;
             displayRandomTrumpTweet();
         } else {
+            realTweet = false;
             displayRandomFakeTweet();
         }
+    }
+    private void correctDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Correct! This Tweet is " + (realTweet ? "real" : "fake"));
+        builder.setPositiveButton("OK", (dialog, which) -> chooseRandomTweet());
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+    private void incorrectDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Incorrect! This Tweet is " + (realTweet ? "real" : "fake"));
+        builder.setPositiveButton("OK", ((dialog, which) -> chooseRandomTweet()));
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 }

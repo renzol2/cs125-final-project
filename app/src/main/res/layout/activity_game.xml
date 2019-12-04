@@ -23,10 +23,10 @@
         android:layout_width="164dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="125dp"
-        android:layout_marginLeft="125dp"
+        android:layout_marginLeft="115dp"
         android:layout_marginTop="25dp"
         android:layout_marginEnd="136dp"
-        android:layout_marginRight="136dp"
+        android:layout_marginRight="200dp"
         android:text="@string/newTweet"
         android:textColor="#000000"
         android:textSize="18sp"
@@ -69,14 +69,14 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="@string/real"
-        tools:layout_marginLeft="150dp" />
+        tools:layout_marginLeft="100dp" />
 
     <Button
         android:id="@+id/fakeButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="200dp"
-        android:layout_marginLeft="300dp"
+        android:layout_marginLeft="250dp"
         android:layout_marginTop="-48dp"
         android:text="@string/fake" />
 
