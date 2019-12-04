@@ -32,13 +32,13 @@ public class GameActivity extends AppCompatActivity {
         setContentView(R.layout.activity_game);
         tweetView = findViewById(R.id.tweet);
 
-        random = new Random();
-        //Initial Tweet
-        chooseRandomTweet();
-
         // Getting fake tweets.
         getter = new TweetGetter("DeepDrumpf");
         getter.grabTweets();
+
+        random = new Random();
+        //Initial Tweet
+        chooseRandomTweet();
 
         // Make the button generate and display a new Tweet.
         Button newTweetButton = findViewById(R.id.submit);
@@ -67,7 +67,7 @@ public class GameActivity extends AppCompatActivity {
 
         // Set the timer.
         TextView timerText = findViewById(R.id.timer);
-        CountDownTimer timer = new CountDownTimer(30000, 1000) {
+        CountDownTimer timer = new CountDownTimer(60000, 1000) {
 
             public void onTick(long millisUntilFinished) {
                 int remainingSeconds = (int) millisUntilFinished / 1000;
@@ -106,6 +106,7 @@ public class GameActivity extends AppCompatActivity {
      * https://whatdoestrumpthink.com/api-docs/index.html
      */
     public void displayRandomTrumpTweet() {
+        System.out.println(";))))))))))) REAL TWEET");
         // Found two APIs with real Donald Trump tweets/quotes, so I figured we could use both!
         String url, quoteName;
         if (random.nextBoolean()) {
@@ -130,10 +131,24 @@ public class GameActivity extends AppCompatActivity {
         // Access the RequestQueue through your singleton class.
         MySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest);
     }
+
     public void displayRandomFakeTweet() {
+        System.out.println("!!!!!!!!!! FAKE TWEET");
         List<twitter4j.Status> tweetsList = getter.getTweetsList();
-        int randIndex = random.nextInt(tweetsList.size());
-        String tweet = tweetsList.get(randIndex).getText();
+        int randIndex;
+        String tweet;
+
+        // If this function is called as the first Tweet to be displayed, TweetGetter can't grab
+        // tweets fast enough to display in time, causing tweetsList to have a size of 0. So instead
+        // we'll just display this meme quote LOL
+        try {
+            randIndex = random.nextInt(tweetsList.size());
+            tweet = tweetsList.get(randIndex).getText();
+        } catch(IllegalArgumentException e) {
+            tweet = "Liberal Clown Geoff Challen couldn't even respond properly to President " +
+                    "Obama's State of the Union Speech without pouring sweat & chugging water!";
+        }
+
         tweetView.setText(tweet);
     }
 

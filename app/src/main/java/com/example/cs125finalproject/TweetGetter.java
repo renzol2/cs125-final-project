@@ -85,9 +85,6 @@ public class TweetGetter {
             String resp = "success";
             try {
                 tweetsList = twitter.getUserTimeline(user);
-                for (twitter4j.Status tweet : tweetsList) {
-                    System.out.println("@" + tweet.getUser().getScreenName() + " - " + tweet.getText());
-                }
             } catch (TwitterException e) {
                 e.printStackTrace();
             }
