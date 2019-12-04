@@ -29,6 +29,7 @@ public class GameActivity extends AppCompatActivity {
     private Random random;
     private int score;
     private final int scoreIncrease = 1000;
+    private final int scoreDecrease = -50;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,7 +86,7 @@ public class GameActivity extends AppCompatActivity {
             }
 
             public void onFinish() {
-                finish();
+                showFinalScore();
             }
         };
 
@@ -161,20 +162,38 @@ public class GameActivity extends AppCompatActivity {
 
     private void correctDialog() {
         // Update score.
-        score += scoreIncrease;
-        scoreText = "Score: " + score;
-        scoreView.setText(scoreText);
+        updateScore(scoreIncrease);
 
+        // Show Dialog.
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("Correct! This Tweet is " + (realTweet ? "real" : "fake"));
         builder.setPositiveButton("OK", (dialog, which) -> chooseRandomTweet());
         AlertDialog dialog = builder.create();
         dialog.show();
     }
+
     private void incorrectDialog() {
+        // Update score.
+        updateScore(scoreDecrease);
+
+        // Show Dialog.
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("Incorrect! This Tweet is " + (realTweet ? "real" : "fake"));
         builder.setPositiveButton("OK", ((dialog, which) -> chooseRandomTweet()));
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    private void updateScore(int changeScore) {
+        score += changeScore;
+        scoreText = "Score: " + score;
+        scoreView.setText(scoreText);
+    }
+
+    private void showFinalScore() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Time's up! Your final score is: " + score);
+        builder.setPositiveButton("OK", ((dialog, which) -> finish()));
         AlertDialog dialog = builder.create();
         dialog.show();
     }
