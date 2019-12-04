@@ -10,7 +10,7 @@ import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
 import twitter4j.conf.ConfigurationBuilder;
 
-public class TweetGetter {
+ class TweetGetter {
     /** User to grab Tweets from. */
     private final String user;
 
@@ -30,7 +30,7 @@ public class TweetGetter {
      * Sets instance variables.
      * @param setUser user screen name
      */
-    public TweetGetter(String setUser) {
+    TweetGetter(String setUser) {
         // Setting user
         user = setUser;
         tweetsList = new ArrayList<>();
@@ -48,12 +48,12 @@ public class TweetGetter {
     /**
      * Public method to invoke AsyncTask that grabs Tweets.
      */
-    public void grabTweets() {
+    void grabTweets() {
         AsyncTask<?,?,?> tweetGrabber = new TweetsAsyncTask();
         tweetGrabber.execute();
     }
 
-    public List<twitter4j.Status> getTweetsList() {
+    List<twitter4j.Status> getTweetsList() {
         try {
             tweetsList = twitter.getUserTimeline(user);
             return tweetsList;
