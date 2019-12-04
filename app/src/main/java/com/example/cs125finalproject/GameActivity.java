@@ -1,5 +1,6 @@
 package com.example.cs125finalproject;
 
+import java.util.List;
 import java.util.Random;
 
 import android.os.Bundle;
@@ -14,10 +15,16 @@ import com.android.volley.toolbox.JsonObjectRequest;
 
 import org.json.JSONException;
 
+import twitter4j.Status;
+import twitter4j.TwitterException;
+
 public class GameActivity extends AppCompatActivity {
 
     /** Displays the tweet. */
     private TextView tweetView;
+    private boolean realTweet;
+    private TweetGetter getter;
+    private Random random;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,16 +32,21 @@ public class GameActivity extends AppCompatActivity {
         setContentView(R.layout.activity_game);
         tweetView = findViewById(R.id.tweet);
 
-        // Set the initial text.
-        displayRandomTrumpTweet();
+        random = new Random();
+        //Initial Tweet
+        chooseRandomTweet();
 
         // Getting fake tweets.
-        TweetGetter getter = new TweetGetter("DeepDrumpf");
+        getter = new TweetGetter("DeepDrumpf");
         getter.grabTweets();
 
         // Make the button generate and display a new Tweet.
         Button newTweetButton = findViewById(R.id.submit);
-        newTweetButton.setOnClickListener(unused -> displayRandomTrumpTweet());
+        newTweetButton.setOnClickListener(unused -> chooseRandomTweet());
+
+        //Buttons for guessing whether Tweet is real or fake
+        Button realButton = findViewById(R.id.realButton);
+        Button fakeButton = findViewById(R.id.fakeButton);
 
         // Set the timer.
         TextView timerText = findViewById(R.id.timer);
@@ -88,5 +100,20 @@ public class GameActivity extends AppCompatActivity {
 
         // Access the RequestQueue through your singleton class.
         MySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest);
+    }
+    public void displayRandomFakeTweet() {
+        List<twitter4j.Status> tweetsList = getter.getTweetsList();
+        Random r = new Random();
+        int randIndex = r.nextInt(tweetsList.size());
+        String tweet = tweetsList.get(randIndex).getText();
+        tweetView.setText(tweet);
+    }
+    private void chooseRandomTweet() {
+        Random r = new Random();
+        if (random.nextBoolean()) {
+            displayRandomTrumpTweet();
+        } else {
+            displayRandomFakeTweet();
+        }
     }
 }

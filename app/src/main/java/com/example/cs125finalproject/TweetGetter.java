@@ -51,6 +51,16 @@ public class TweetGetter {
         tweetGrabber.execute();
     }
 
+    public List<twitter4j.Status> getTweetsList() {
+        try {
+            tweetsList = twitter.getUserTimeline(user);
+            return tweetsList;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return tweetsList;
+    }
+
     /**
      * Private class that essentially creates a new thread not within the Activity/UI threads
      * that will safely grab Tweets using Twitter4J.
