@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -54,6 +55,8 @@ public class MainActivity extends AppCompatActivity {
         ImageView trumpImage = findViewById(R.id.trumpImage);
         String url = "https://api.tronalddump.io/random/meme";
         Picasso.get().load(url).into(trumpImage);
+        // Reset image by clicking it (doesn't seem to work lol)
+        trumpImage.setOnClickListener(v -> Picasso.get().load(url).into(trumpImage));
 
         final Button newGameButton = findViewById(R.id.newGame);
         newGameButton.setOnClickListener(unused -> startActivity());
