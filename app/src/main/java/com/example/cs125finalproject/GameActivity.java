@@ -1,5 +1,7 @@
 package com.example.cs125finalproject;
 
+import java.util.Random;
+
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.widget.Button;
@@ -12,24 +14,9 @@ import com.android.volley.toolbox.JsonObjectRequest;
 
 import org.json.JSONException;
 
-import twitter4j.Paging;
-import twitter4j.Status;
-import twitter4j.Twitter;
-import twitter4j.TwitterException;
-import twitter4j.TwitterFactory;
-import twitter4j.conf.ConfigurationBuilder;
-
-import java.util.ArrayList;
-import java.util.List;
-
 public class GameActivity extends AppCompatActivity {
 
-    /** Tokens for Twitter Authentication. Will probably move these to a string resources page. */
-/*    private String AccessToken = getResources().getString(R.string.accessToken);
-    private String AccessSecret = getResources().getString(R.string.accessTokenSecret);
-    private String ConsumerKey = getResources().getString(R.string.consumerKey);
-    private String ConsumerSecret = getResources().getString(R.string.consumerSecret);*/
-
+    /** Displays the tweet. */
     private TextView tweetView;
 
     @Override
@@ -41,12 +28,11 @@ public class GameActivity extends AppCompatActivity {
         // Set the initial text.
         displayRandomTrumpTweet();
 
-        // Try getting Drumpf tweets.
-        // Make the button generate and display a new Tweet.
+        // Getting fake tweets.
         TweetGetter getter = new TweetGetter("DeepDrumpf");
-        // Here we'll grab the tweets to display, but currently it's not working since I need to
-        // work on something with AsyncTasks(?)
+        getter.grabTweets();
 
+        // Make the button generate and display a new Tweet.
         Button newTweetButton = findViewById(R.id.submit);
         newTweetButton.setOnClickListener(unused -> displayRandomTrumpTweet());
 
@@ -72,19 +58,28 @@ public class GameActivity extends AppCompatActivity {
     /**
      * Code taken from:
      * https://developer.android.com/training/volley/request
-     * Change the URL to get a different JSON object (theoretically...)
      *
-     * Current issue: Twitter requires authentication with consumer keys/secrets, and I don't know
-     * how to set those up...
+     * APIs used:
+     * https://docs.tronalddump.io/
+     * https://whatdoestrumpthink.com/api-docs/index.html
      */
     public void displayRandomTrumpTweet() {
-        String url = "https://api.tronalddump.io/random/quote";
+        // Found two APIs with real Donald Trump tweets/quotes, so I figured we could use both!
+        Random r = new Random();
+        String url, quoteName;
+        if (r.nextBoolean()) {
+            url = "https://api.tronalddump.io/random/quote";
+            quoteName = "value";
+        } else {
+            url = "https://api.whatdoestrumpthink.com/api/v1/quotes/random";
+            quoteName = "message";
+        }
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                 (Request.Method.GET, url, null,
                         response -> {
                             try {
-                                tweetView.setText(response.getString("value"));
+                                tweetView.setText(response.getString(quoteName));
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
