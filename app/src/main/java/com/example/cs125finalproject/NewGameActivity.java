@@ -16,7 +16,7 @@ public class NewGameActivity extends AppCompatActivity {
         startGame.setOnClickListener(unused -> startActivity());
     }
 
-    public void startActivity() {
+    private void startActivity() {
         startActivity(new Intent(this, GameActivity.class));
         finish();
     }
