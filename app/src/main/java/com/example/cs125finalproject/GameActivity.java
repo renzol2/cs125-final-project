@@ -22,9 +22,13 @@ public class GameActivity extends AppCompatActivity {
 
     /** Displays the tweet. */
     private TextView tweetView;
+    private TextView scoreView;
+    private String scoreText;
     private boolean realTweet;
     private TweetGetter getter;
     private Random random;
+    private int score;
+    private final int scoreIncrease = 1000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +52,12 @@ public class GameActivity extends AppCompatActivity {
         Button realButton = findViewById(R.id.realButton);
         Button fakeButton = findViewById(R.id.fakeButton);
 
-        //Launch AlertDialog based on correct or incorrect
+        // Initialize and display score.
+        scoreView = findViewById(R.id.score);
+        scoreText = "Score: " + score;
+        scoreView.setText(scoreText);
+
+        //Launch AlertDialog based on correct or incorrect.
         realButton.setOnClickListener(v -> {
             if (realTweet) {
                 correctDialog();
@@ -106,7 +115,6 @@ public class GameActivity extends AppCompatActivity {
      * https://whatdoestrumpthink.com/api-docs/index.html
      */
     public void displayRandomTrumpTweet() {
-        System.out.println(";))))))))))) REAL TWEET");
         // Found two APIs with real Donald Trump tweets/quotes, so I figured we could use both!
         String url, quoteName;
         if (random.nextBoolean()) {
@@ -133,7 +141,6 @@ public class GameActivity extends AppCompatActivity {
     }
 
     public void displayRandomFakeTweet() {
-        System.out.println("!!!!!!!!!! FAKE TWEET");
         List<twitter4j.Status> tweetsList = getter.getTweetsList();
         int randIndex;
         String tweet;
@@ -153,6 +160,11 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void correctDialog() {
+        // Update score.
+        score += scoreIncrease;
+        scoreText = "Score: " + score;
+        scoreView.setText(scoreText);
+
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("Correct! This Tweet is " + (realTweet ? "real" : "fake"));
         builder.setPositiveButton("OK", (dialog, which) -> chooseRandomTweet());
