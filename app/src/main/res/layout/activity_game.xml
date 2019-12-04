@@ -31,12 +31,12 @@
 
     <TextView
         android:id="@+id/tweet"
-        android:layout_width="335dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="40dp"
         android:gravity="center_horizontal"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textSize="30sp"
+        android:textSize="24sp"
         android:textStyle="bold"
         android:typeface="serif"
         app:fontFamily="serif" />
@@ -49,6 +49,32 @@
         android:layout_marginStart="160dp"
         android:layout_marginEnd="136dp"
         android:text="@string/newTweetButton"
-        tools:text="@string/newTweetButton" />
+        tools:text="@string/newTweetButton"
+        android:layout_marginLeft="160dp"
+        android:layout_marginRight="136dp" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/realOrFake"
+        android:textSize="20dp" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/real"
+        tools:layout_marginLeft="80dp" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="200dp"
+        android:layout_marginTop="-48dp"
+        android:text="@string/fake"
+        android:layout_marginStart="200dp" />
 
 </LinearLayout>

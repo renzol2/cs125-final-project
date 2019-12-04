@@ -5,4 +5,7 @@
     <string name="submitButton">Submit</string>
     <string name="newTweetButton">NEW TWEET</string>
     <string name="startGame">Start Game</string>
+    <string name="realOrFake">Guess if real or fake:</string>
+    <string name="real">Real</string>
+    <string name="fake">Fake</string>
 </resources>
