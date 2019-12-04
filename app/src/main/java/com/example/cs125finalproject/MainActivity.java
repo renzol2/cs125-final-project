@@ -3,10 +3,16 @@ package com.example.cs125finalproject;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
+import java.io.InputStream;
+import java.net.URL;
 
 
 /**
@@ -44,8 +50,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // TODO: make a button that goes to NewGameActivity
-        final TextView textView = findViewById(R.id.textView);
+        // Set image.
+        ImageView trumpImage = findViewById(R.id.trumpImage);
+        String url = "https://api.tronalddump.io/random/meme";
+        Picasso.get().load(url).into(trumpImage);
+
         final Button newGameButton = findViewById(R.id.newGame);
         newGameButton.setOnClickListener(unused -> startActivity());
     }
@@ -54,6 +63,5 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, NewGameActivity.class);
         startActivity(intent);
     }
-
 
 }

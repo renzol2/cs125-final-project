@@ -38,4 +38,7 @@ dependencies {
     implementation 'com.google.android.material:material:1.0.0'
     implementation fileTree(dir: 'libs', include: ['*.aar', '*.jar'], exclude: [])
     implementation files('libs/twitter4j-core-4.0.7.jar')
+
+    // Images
+    implementation 'com.squareup.picasso:picasso:2.71828'
 }
