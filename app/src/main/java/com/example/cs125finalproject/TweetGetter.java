@@ -2,6 +2,7 @@ package com.example.cs125finalproject;
 
 import android.os.AsyncTask;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import twitter4j.Twitter;
@@ -32,6 +33,7 @@ public class TweetGetter {
     public TweetGetter(String setUser) {
         // Setting user
         user = setUser;
+        tweetsList = new ArrayList<>();
 
         // Setting authorization keys for Twitter API Authorization
         ConfigurationBuilder cb = new ConfigurationBuilder();

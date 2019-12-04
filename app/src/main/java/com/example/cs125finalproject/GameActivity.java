@@ -85,7 +85,20 @@ public class GameActivity extends AppCompatActivity {
     }
 
     /**
-     * Code taken from:
+     * Picks between a real or fake Tweet.
+     */
+    private void chooseRandomTweet() {
+        if (random.nextBoolean()) {
+            realTweet = true;
+            displayRandomTrumpTweet();
+        } else {
+            realTweet = false;
+            displayRandomFakeTweet();
+        }
+    }
+
+    /**
+     * JSON Request code taken from:
      * https://developer.android.com/training/volley/request
      *
      * APIs used:
@@ -123,15 +136,7 @@ public class GameActivity extends AppCompatActivity {
         String tweet = tweetsList.get(randIndex).getText();
         tweetView.setText(tweet);
     }
-    private void chooseRandomTweet() {
-        if (random.nextBoolean()) {
-            realTweet = true;
-            displayRandomTrumpTweet();
-        } else {
-            realTweet = false;
-            displayRandomFakeTweet();
-        }
-    }
+
     private void correctDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("Correct! This Tweet is " + (realTweet ? "real" : "fake"));
