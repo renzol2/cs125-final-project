@@ -1,13 +1,9 @@
 package com.example.cs125finalproject;
 
 import android.os.AsyncTask;
-import android.text.PrecomputedText;
-
-import androidx.core.text.PrecomputedTextCompat;
 
 import java.util.List;
 
-import twitter4j.Status;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
@@ -48,18 +44,42 @@ public class TweetGetter {
     }
 
     /**
-     * Skeleton from https://stackoverflow.com/questions/2943161/get-tweets-of-a-public-twitter-profile
-     * TODO: Not functional yet
+     * Public method to invoke AsyncTask that grabs Tweets.
      */
-    private void grabTweets() {
-        try {
-            tweetsList = twitter.getUserTimeline(user);
-            for (twitter4j.Status tweet : tweetsList) {
-                System.out.println("@" + tweet.getUser().getScreenName() + " - " + tweet.getText());
-            }
-        } catch (TwitterException e) {
-            e.printStackTrace();
-        }
+    public void grabTweets() {
+        AsyncTask<?,?,?> tweetGrabber = new TweetsAsyncTask();
+        tweetGrabber.execute();
+    }
 
+    /**
+     * Private class that essentially creates a new thread not within the Activity/UI threads
+     * that will safely grab Tweets using Twitter4J.
+     */
+    private final class TweetsAsyncTask extends AsyncTask<Object, Object, Object> {
+
+        /**
+         * Main function of class that actually gets Tweets.
+         *
+         * TODO: Need to send list of tweets to GameActivity instead of just printing them
+         *
+         * Taken primarily from:
+         * https://github.com/Twitter4J/Twitter4J/blob/master/twitter4j-examples/src/main/java/twitter4j/examples/timeline/GetUserTimeline.java
+         *
+         * @param params useless, only needed to override function
+         * @return also useless, only needed to override function
+         */
+        @Override
+        protected String doInBackground(Object... params) {
+            String resp = "success";
+            try {
+                tweetsList = twitter.getUserTimeline(user);
+                for (twitter4j.Status tweet : tweetsList) {
+                    System.out.println("@" + tweet.getUser().getScreenName() + " - " + tweet.getText());
+                }
+            } catch (TwitterException e) {
+                e.printStackTrace();
+            }
+            return resp;
+        }
     }
 }
