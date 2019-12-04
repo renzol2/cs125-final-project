@@ -7,6 +7,9 @@ import androidx.core.text.PrecomputedTextCompat;
 
 import java.util.List;
 
+
+import javax.xml.transform.Result;
+
 import twitter4j.Status;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
@@ -52,14 +55,34 @@ public class TweetGetter {
      * TODO: Not functional yet
      */
     private void grabTweets() {
-        try {
-            tweetsList = twitter.getUserTimeline(user);
-            for (twitter4j.Status tweet : tweetsList) {
-                System.out.println("@" + tweet.getUser().getScreenName() + " - " + tweet.getText());
+        AsyncTask<?,?,?> tweetGrabber = new TweetsAsyncTask();
+        tweetGrabber.execute();
+    }
+
+    private final class TweetsAsyncTask extends AsyncTask<String, String, String> {
+
+        @Override
+        protected String doInBackground(String... params) {
+            String resp = "success";
+            try {
+                tweetsList = twitter.getUserTimeline(user);
+                for (twitter4j.Status tweet : tweetsList) {
+                    System.out.println("@" + tweet.getUser().getScreenName() + " - " + tweet.getText());
+                }
+            } catch (TwitterException e) {
+                e.printStackTrace();
             }
-        } catch (TwitterException e) {
-            e.printStackTrace();
+            return resp;
+        }
+/*
+        @Override
+        protected void onPreExecute() {
+            ;
         }
 
+        @Override
+        protected void onPostExecute(String result) {
+            ;
+        }*/
     }
 }

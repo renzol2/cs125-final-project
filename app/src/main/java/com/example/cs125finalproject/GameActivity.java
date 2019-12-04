@@ -25,10 +25,10 @@ import java.util.List;
 public class GameActivity extends AppCompatActivity {
 
     /** Tokens for Twitter Authentication. Will probably move these to a string resources page. */
-    private String AccessToken = getResources().getString(R.string.accessToken);
+/*    private String AccessToken = getResources().getString(R.string.accessToken);
     private String AccessSecret = getResources().getString(R.string.accessTokenSecret);
     private String ConsumerKey = getResources().getString(R.string.consumerKey);
-    private String ConsumerSecret = getResources().getString(R.string.consumerSecret);
+    private String ConsumerSecret = getResources().getString(R.string.consumerSecret);*/
 
     private TextView tweetView;
 
