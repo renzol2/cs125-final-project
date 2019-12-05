@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">CS125 Final Project</string>
     <string name="title">TRUMPED</string>
-    <string name="newTweet">Click to display a new Trump tweet:</string>
+    <string name="newTweet">Trump says:</string>
     <string name="submitButton">Submit</string>
     <string name="newTweetButton">NEW TWEET</string>
     <string name="startGame">Start Game</string>

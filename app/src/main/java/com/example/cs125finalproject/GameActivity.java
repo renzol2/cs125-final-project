@@ -168,6 +168,7 @@ public class GameActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("Correct! This Tweet is " + (realTweet ? "real" : "fake"));
         builder.setPositiveButton("OK", (dialog, which) -> chooseRandomTweet());
+        builder.setOnDismissListener(unused -> chooseRandomTweet());
         AlertDialog dialog = builder.create();
         dialog.show();
     }
@@ -178,8 +179,9 @@ public class GameActivity extends AppCompatActivity {
 
         // Show Dialog.
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Incorrect! This Tweet is " + (realTweet ? "real" : "fake"));
+        builder.setMessage("TRUMPED! This Tweet is " + (realTweet ? "real" : "fake"));
         builder.setPositiveButton("OK", ((dialog, which) -> chooseRandomTweet()));
+        builder.setOnDismissListener(unused -> chooseRandomTweet());
         AlertDialog dialog = builder.create();
         dialog.show();
     }
@@ -193,7 +195,7 @@ public class GameActivity extends AppCompatActivity {
     private void showFinalScore() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("Time's up! Your final score is: " + score);
-        builder.setPositiveButton("OK", ((dialog, which) -> finish()));
+        builder.setOnDismissListener(unused -> finish());
         AlertDialog dialog = builder.create();
         dialog.show();
     }
