@@ -151,7 +151,9 @@ public class GameActivity extends AppCompatActivity {
         // we'll just display this meme quote LOL
         try {
             randIndex = random.nextInt(tweetsList.size());
-            tweet = tweetsList.get(randIndex).getText();
+            tweet = tweetsList.get(randIndex).getText()
+                    .replace("[", "")
+                    .replace("]","");
         } catch(IllegalArgumentException e) {
             tweet = "Liberal Clown Geoff Challen couldn't even respond properly to President " +
                     "Obama's State of the Union Speech without pouring sweat & chugging water!";
