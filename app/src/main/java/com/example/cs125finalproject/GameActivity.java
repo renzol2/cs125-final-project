@@ -183,7 +183,7 @@ public class GameActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("TRUMPED! This Tweet is " + (realTweet ? "real" : "fake"));
         builder.setPositiveButton("OK", (dialog, which) -> chooseRandomTweet());
-        //builder.setOnDismissListener(dialog -> chooseRandomTweet());
+        //builder.setOnDismissListener(unused -> chooseRandomTweet());
         AlertDialog dialog = builder.create();
         dialog.show();
     }
