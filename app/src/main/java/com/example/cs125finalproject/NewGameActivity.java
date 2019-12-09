@@ -23,6 +23,9 @@ public class NewGameActivity extends AppCompatActivity {
         startGame.setOnClickListener(unused -> startActivity());
     }
 
+    /**
+     * Starts the game. Only runs if a game duration is selected.
+     */
     private void startActivity() {
         if (durationButtons.getCheckedRadioButtonId() != -1) {
             // Set new intent.
