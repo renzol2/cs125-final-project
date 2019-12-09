@@ -8,4 +8,10 @@
     <string name="realOrFake">Guess if real or fake:</string>
     <string name="real">Real</string>
     <string name="fake">Fake</string>
+    <string name="settings">SETTINGS</string>
+    <string name="trump_dislikes_geoff_challen">Trump dislikes Geoff Challen</string>
+    <string name="game_duration">Game duration:</string>
+    <string name="_30_seconds">30 seconds</string>
+    <string name="_60_seconds">60 seconds</string>
+    <string name="_90_seconds">90 seconds</string>
 </resources>

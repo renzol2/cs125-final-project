@@ -19,7 +19,7 @@
         android:layout_marginRight="38dp"
         android:text="@string/title"
         android:textAllCaps="true"
-        android:textColor="#E93A00"
+        android:textColor="#C53300"
         android:textColorHighlight="#00000000"
         android:textColorHint="#00000000"
         android:textSize="90sp"

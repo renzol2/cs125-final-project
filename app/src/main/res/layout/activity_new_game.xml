@@ -1,18 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#D5635D"
+    android:orientation="vertical">
 
     <TextView
-        android:id="@+id/settings"
-        android:layout_width="wrap_content"
+        android:id="@+id/settingsTitle"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="settings will go here" />
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="@string/settings"
+        android:textColor="#C53300"
+        android:textSize="50sp"
+        android:textStyle="bold"
+        app:fontFamily="sans-serif-condensed" />
+
+    <Switch
+        android:id="@+id/customNameSwitch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/trump_dislikes_geoff_challen"
+        android:textStyle="bold"
+        android:typeface="monospace"
+        android:layout_marginStart="10dp" />
+
+    <TextView
+        android:id="@+id/durationHeading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="30dp"
+        android:text="@string/game_duration"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:typeface="monospace"
+        android:layout_marginStart="10dp" />
+
+    <RadioGroup
+        android:id="@+id/durationButtons"
+        android:layout_width="match_parent"
+        android:layout_height="135dp">
+
+        <RadioButton
+            android:id="@+id/lengthTimeButton30s"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:text="@string/_30_seconds" />
+
+        <RadioButton
+            android:id="@+id/lengthTimeButton60s"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:text="@string/_60_seconds" />
+
+        <RadioButton
+            android:id="@+id/lengthTimeButton90s"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:text="@string/_90_seconds" />
+    </RadioGroup>
 
     <Button
         android:id="@+id/startGame"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="500dp"
+        android:layout_marginTop="200dp"
         android:text="@string/startGame" />
 </LinearLayout>

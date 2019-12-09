@@ -3,6 +3,7 @@ package com.example.cs125finalproject;
 import java.util.List;
 import java.util.Random;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.widget.Button;
@@ -29,12 +30,19 @@ public class GameActivity extends AppCompatActivity {
     private final int scoreIncrease = 1000;
     private final int scoreDecrease = -250;
     private static int highScore = 0;
+    private int gameDuration;
+    private boolean useGeoffChallen;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
         tweetView = findViewById(R.id.tweet);
+
+        // Getting information from previous intent.
+        Intent intent = getIntent();
+        gameDuration = intent.getIntExtra("gameDuration", 60000);
+        useGeoffChallen = intent.getBooleanExtra("useGeoffChallen", false);
 
         // Getting fake tweets.
         getter = new TweetGetter("DeepDrumpf");
@@ -76,7 +84,7 @@ public class GameActivity extends AppCompatActivity {
 
         // Set the timer.
         TextView timerText = findViewById(R.id.timer);
-        CountDownTimer timer = new CountDownTimer(60000, 1000) {
+        CountDownTimer timer = new CountDownTimer(gameDuration, 1000) {
 
             public void onTick(long millisUntilFinished) {
                 int remainingSeconds = (int) millisUntilFinished / 1000;
@@ -112,7 +120,26 @@ public class GameActivity extends AppCompatActivity {
     /**
      * JSON Request code taken from:
      * https://developer.android.com/training/volley/request
-     *
+     * @param url URL with HTTP GET request
+     * @param objectName name of object in JSON
+     */
+    public void displayFromJSON(String url, String objectName) {
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
+                (Request.Method.GET, url, null,
+                        response -> {
+                            try {
+                                tweetView.setText(response.getString(objectName));
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        },
+                        error -> System.out.println("ERROR!! " + error.getMessage()));
+
+        // Access the RequestQueue through your singleton class.
+        MySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest);
+    }
+
+    /**
      * APIs used:
      * https://docs.tronalddump.io/
      * https://whatdoestrumpthink.com/api-docs/index.html
@@ -128,40 +155,41 @@ public class GameActivity extends AppCompatActivity {
             quoteName = "message";
         }
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
-                (Request.Method.GET, url, null,
-                        response -> {
-                            try {
-                                tweetView.setText(response.getString(quoteName));
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                        },
-                        error -> System.out.println("ERROR!! " + error.getMessage()));
-
-        // Access the RequestQueue through your singleton class.
-        MySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest);
+        displayFromJSON(url, quoteName);
     }
 
     public void displayRandomFakeTweet() {
-        List<twitter4j.Status> tweetsList = getter.getTweetsList();
-        int randIndex;
-        String tweet;
+        boolean decider;
+        if (useGeoffChallen) {
+            decider = random.nextBoolean();
+        } else {
+            decider = true;
+        }
+        if (decider) {
+            List<twitter4j.Status> tweetsList = getter.getTweetsList();
+            int randIndex;
+            String tweet;
 
-        // If this function is called as the first Tweet to be displayed, TweetGetter can't grab
-        // tweets fast enough to display in time, causing tweetsList to have a size of 0. So instead
-        // we'll just display this meme quote LOL
-        try {
-            randIndex = random.nextInt(tweetsList.size());
-            tweet = tweetsList.get(randIndex).getText()
-                    .replace("[", "")
-                    .replace("]","");
-        } catch(IllegalArgumentException e) {
-            tweet = "Liberal Clown Geoff Challen couldn't even respond properly to President " +
-                    "Obama's State of the Union Speech without pouring sweat & chugging water!";
+            // If this function is called as the first Tweet to be displayed, TweetGetter can't grab
+            // tweets fast enough to display in time, causing tweetsList to have a size of 0. So instead
+            // we'll just display this meme quote LOL
+            try {
+                randIndex = random.nextInt(tweetsList.size());
+                tweet = tweetsList.get(randIndex).getText()
+                        .replace("[", "")
+                        .replace("]","");
+                tweetView.setText(tweet);
+            } catch(IllegalArgumentException e) {
+                String url = "https://api.whatdoestrumpthink.com/api/v1/quotes/personalized?q=Bernie%20Sanders";
+                String objName = "message";
+                displayFromJSON(url, objName);
+            }
+        } else {
+            String url = "https://api.whatdoestrumpthink.com/api/v1/quotes/personalized?q=Geoff%20Challen";
+            String objName = "message";
+            displayFromJSON(url, objName);
         }
 
-        tweetView.setText(tweet);
     }
 
     private void correctDialog() {
