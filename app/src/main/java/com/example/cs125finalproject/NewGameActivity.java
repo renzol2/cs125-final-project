@@ -9,9 +9,7 @@ import android.widget.Switch;
 import androidx.appcompat.app.AppCompatActivity;
 
 /**
- * Possible settings to include:
- * - set time limit
- * - enable custom names
+ * Implements settings for the game.
  */
 public class NewGameActivity extends AppCompatActivity {
     RadioGroup durationButtons;
