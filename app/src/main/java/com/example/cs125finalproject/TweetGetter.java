@@ -10,15 +10,18 @@ import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
 import twitter4j.conf.ConfigurationBuilder;
 
- class TweetGetter {
+/**
+ * Grabs Tweets directly from Twitter using Twitter4J.
+ */
+class TweetGetter {
     /** User to grab Tweets from. */
     private final String user;
 
     /** Tokens for Twitter Authentication. Will probably move these to a string resources page. */
-    private static String AccessToken = "747317971110899712-C4T143wdNfFxnSQTBEnyi6LD0zT4eGX";
-    private static String AccessSecret = "Cg0BOv7SqikaObUOX9i1OEz6Pz7bbj78QnvhskdpiCgGK";
-    private static String ConsumerKey = "HTjt6QQpZ9pFqi3ojCKrF5ZEP";
-    private static String ConsumerSecret = "5EyKqzk9n3JrxrOpB2pel6XBIPiQ5VoRzEn13LwTTMBMLIs3Rj";
+    private static final String AccessToken = "747317971110899712-C4T143wdNfFxnSQTBEnyi6LD0zT4eGX";
+    private static final String AccessSecret = "Cg0BOv7SqikaObUOX9i1OEz6Pz7bbj78QnvhskdpiCgGK";
+    private static final String ConsumerKey = "HTjt6QQpZ9pFqi3ojCKrF5ZEP";
+    private static final String ConsumerSecret = "5EyKqzk9n3JrxrOpB2pel6XBIPiQ5VoRzEn13LwTTMBMLIs3Rj";
 
     /** Twitter instance variable for getting Tweets.*/
     private Twitter twitter;

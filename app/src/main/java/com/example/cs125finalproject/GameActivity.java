@@ -118,6 +118,9 @@ public class GameActivity extends AppCompatActivity {
     }
 
     /**
+     * Helper function that takes a URL with a HTTP GET request and the JSON object name and displays
+     * the information in the instance variable textView.
+     *
      * JSON Request code taken from:
      * https://developer.android.com/training/volley/request
      * @param url URL with HTTP GET request
@@ -158,6 +161,10 @@ public class GameActivity extends AppCompatActivity {
         displayFromJSON(url, quoteName);
     }
 
+    /**
+     * Picks between either a list of Tweets curated from DeepDrumpf or a personalized quote made
+     * with Geoff Challen's name (if wanted by the user).
+     */
     public void displayRandomFakeTweet() {
         boolean decider;
         if (useGeoffChallen) {
@@ -172,7 +179,7 @@ public class GameActivity extends AppCompatActivity {
 
             // If this function is called as the first Tweet to be displayed, TweetGetter can't grab
             // tweets fast enough to display in time, causing tweetsList to have a size of 0. So instead
-            // we'll just display this meme quote LOL
+            // we'll just display a different quote
             try {
                 randIndex = random.nextInt(tweetsList.size());
                 tweet = tweetsList.get(randIndex).getText()
@@ -192,6 +199,9 @@ public class GameActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Notifies the user that they were correct, updates score, and prompts a new random tweet.
+     */
     private void correctDialog() {
         // Update score.
         updateScore(scoreIncrease);
@@ -205,6 +215,9 @@ public class GameActivity extends AppCompatActivity {
         dialog.show();
     }
 
+    /**
+     * Same as above, but notifying for incorrect choice and updating score accordingly.
+     */
     private void incorrectDialog() {
         // Update score.
         updateScore(scoreDecrease);
@@ -218,12 +231,19 @@ public class GameActivity extends AppCompatActivity {
         dialog.show();
     }
 
+    /**
+     * Updates score and changes the scoreView.
+     * @param changeScore amount to change score
+     */
     private void updateScore(int changeScore) {
         score += changeScore;
         scoreText = "Score: " + score + "\t\tHigh Score: " + highScore;
         scoreView.setText(scoreText);
     }
 
+    /**
+     * Shows when the time is up. Sets a dismissListener to finish the activity.
+     */
     private void showFinalScore() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("Time's up! Your final score is: " + score + "\nHigh score: " + highScore);
