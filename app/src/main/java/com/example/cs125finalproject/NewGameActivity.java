@@ -6,6 +6,12 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+/**
+ * Possible settings to include:
+ * - set time limit
+ * - enable custom names
+ * - set custom names to use with random quote generators
+ */
 public class NewGameActivity extends AppCompatActivity {
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

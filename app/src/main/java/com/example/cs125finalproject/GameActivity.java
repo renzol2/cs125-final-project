@@ -3,10 +3,8 @@ package com.example.cs125finalproject;
 import java.util.List;
 import java.util.Random;
 
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.text.AlteredCharSequence;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -29,7 +27,8 @@ public class GameActivity extends AppCompatActivity {
     private Random random;
     private int score;
     private final int scoreIncrease = 1000;
-    private final int scoreDecrease = -50;
+    private final int scoreDecrease = -250;
+    private static int highScore = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +54,7 @@ public class GameActivity extends AppCompatActivity {
 
         // Initialize and display score.
         scoreView = findViewById(R.id.score);
-        scoreText = "Score: " + score;
+        scoreText = "Score: " + score + "\t\tHigh Score: " + highScore;
         scoreView.setText(scoreText);
 
         //Launch AlertDialog based on correct or incorrect.
@@ -86,6 +85,9 @@ public class GameActivity extends AppCompatActivity {
             }
 
             public void onFinish() {
+                if (score > highScore) {
+                    highScore = score;
+                }
                 showFinalScore();
             }
         };
@@ -169,8 +171,8 @@ public class GameActivity extends AppCompatActivity {
         // Show Dialog.
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("Correct! This Tweet is " + (realTweet ? "real" : "fake"));
-        builder.setPositiveButton("OK", (dialog, which) -> chooseRandomTweet());
-        //builder.setOnDismissListener(unused -> chooseRandomTweet());
+        //builder.setPositiveButton("OK", (dialog, which) -> chooseRandomTweet());
+        builder.setOnDismissListener(unused -> chooseRandomTweet());
         AlertDialog dialog = builder.create();
         dialog.show();
     }
@@ -182,21 +184,21 @@ public class GameActivity extends AppCompatActivity {
         // Show Dialog.
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("TRUMPED! This Tweet is " + (realTweet ? "real" : "fake"));
-        builder.setPositiveButton("OK", (dialog, which) -> chooseRandomTweet());
-        //builder.setOnDismissListener(unused -> chooseRandomTweet());
+        //builder.setPositiveButton("OK", (dialog, which) -> chooseRandomTweet());
+        builder.setOnDismissListener(unused -> chooseRandomTweet());
         AlertDialog dialog = builder.create();
         dialog.show();
     }
 
     private void updateScore(int changeScore) {
         score += changeScore;
-        scoreText = "Score: " + score;
+        scoreText = "Score: " + score + "\t\tHigh Score: " + highScore;
         scoreView.setText(scoreText);
     }
 
     private void showFinalScore() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Time's up! Your final score is: " + score);
+        builder.setMessage("Time's up! Your final score is: " + score + "\nHigh score: " + highScore);
         builder.setOnDismissListener(unused -> finish());
         AlertDialog dialog = builder.create();
         dialog.show();
