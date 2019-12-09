@@ -32,14 +32,15 @@
         android:id="@+id/newTweetText"
         android:layout_width="164dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="right"
         android:layout_marginStart="125dp"
         android:layout_marginTop="25dp"
         android:layout_marginEnd="136dp"
         android:text="@string/newTweet"
         android:textColor="#000000"
         android:textSize="18sp"
-        android:textStyle="bold|italic" />
+        android:textStyle="bold|italic"
+        android:layout_marginLeft="125dp"
+        android:layout_marginRight="136dp" />
 
     <TextView
         android:id="@+id/tweet"
@@ -49,7 +50,7 @@
         android:layout_marginBottom="0dp"
         android:gravity="center_horizontal"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textSize="22sp"
+        android:textSize="24sp"
         android:textStyle="bold"
         android:typeface="serif"
         app:fontFamily="serif" />
@@ -62,7 +63,9 @@
         android:layout_marginStart="160dp"
         android:layout_marginEnd="136dp"
         android:text="@string/newTweetButton"
-        tools:text="@string/newTweetButton" />
+        tools:text="@string/newTweetButton"
+        android:layout_marginRight="136dp"
+        android:layout_marginLeft="160dp" />
 
     <TextView
         android:id="@+id/prompt"
@@ -70,7 +73,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="@string/realOrFake"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:textStyle="bold"
         android:typeface="monospace" />
 
